@@ -1,9 +1,9 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   createTask,
   getTasks,
   markTaskDone,
-} from "../controllers/task.controller.js";
+} = require("../controllers/task.controller.js");
 
 const router = express.Router();
 
@@ -11,4 +11,4 @@ router.post("/task", createTask);
 router.get("/task", getTasks);
 router.put("/task/:id", markTaskDone);
 
-export default router;
+module.exports = router;

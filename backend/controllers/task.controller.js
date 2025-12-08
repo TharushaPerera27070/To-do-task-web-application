@@ -1,6 +1,6 @@
-import { pool } from "../config/db.js";
+const { pool } = require("../config/db.js");
 
-export const createTask = async (req, res) => {
+const createTask = async (req, res) => {
   try {
     const { title, description } = req.body;
     const newTask = await pool.query(
@@ -14,7 +14,7 @@ export const createTask = async (req, res) => {
   }
 };
 
-export const getTasks = async (req, res) => {
+const getTasks = async (req, res) => {
   try {
     const allTasks = await pool.query(
       "SELECT * FROM task WHERE is_completed = FALSE ORDER BY created_at DESC LIMIT 5"
@@ -26,7 +26,7 @@ export const getTasks = async (req, res) => {
   }
 };
 
-export const markTaskDone = async (req, res) => {
+const markTaskDone = async (req, res) => {
   try {
     const { id } = req.params;
     await pool.query("UPDATE task SET is_completed = TRUE WHERE id = $1", [id]);
@@ -36,3 +36,5 @@ export const markTaskDone = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+module.exports = { createTask, getTasks, markTaskDone };
