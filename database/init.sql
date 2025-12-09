@@ -1,4 +1,3 @@
-CREATE DATABASE todo_app;
 
 CREATE TABLE task(
     id SERIAL PRIMARY KEY,
