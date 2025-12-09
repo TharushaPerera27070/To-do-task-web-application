@@ -35,15 +35,17 @@ A full-stack to-do task web application built with React, Node.js, Express, and 
    cd To-do-task-web-application
    ```
 
-2. Start the application:
+2. **Start Docker Desktop** (make sure Docker Engine is running)
+
+3. Start the application:
 
    ```bash
    docker compose up --build
    ```
 
-3. Open your browser and navigate to:
+4. Open your browser and navigate to:
    - **Frontend**: http://localhost:3000
-   - **Backend API**: http://localhost:5000
+   - **Backend API**: http://localhost:5000/task
 
 ### Local Development (Without Docker)
 
@@ -97,6 +99,7 @@ Frontend:
 
 ```bash
 cd frontend
+npm install
 npm test
 ```
 
@@ -104,6 +107,7 @@ Backend:
 
 ```bash
 cd backend
+npm install
 npm test
 ```
 
