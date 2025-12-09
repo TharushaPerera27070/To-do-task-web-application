@@ -111,6 +111,71 @@ npm install
 npm test
 ```
 
+## Viewing the Database
+
+### Method 1: Using Docker Command Line
+
+View all tasks in the database:
+
+```bash
+docker exec todo_db psql -U user -d taskdb -c "SELECT * FROM task;"
+```
+
+View only pending tasks:
+
+```bash
+docker exec todo_db psql -U user -d taskdb -c "SELECT * FROM task WHERE is_completed = FALSE;"
+```
+
+View completed tasks:
+
+```bash
+docker exec todo_db psql -U user -d taskdb -c "SELECT * FROM task WHERE is_completed = TRUE;"
+```
+
+### Method 2: Interactive PostgreSQL Shell
+
+Access the PostgreSQL shell inside the Docker container:
+
+```bash
+docker exec -it todo_db psql -U user -d taskdb
+```
+
+Once inside, you can run SQL commands:
+
+```sql
+-- View all tasks
+SELECT * FROM task;
+
+-- View task count
+SELECT COUNT(*) FROM task;
+
+-- View pending tasks only
+SELECT * FROM task WHERE is_completed = FALSE;
+
+-- Exit the shell
+\q
+```
+
+### Method 3: Using Database GUI Tools
+
+You can connect using tools like **pgAdmin**, **DBeaver**, or **TablePlus**:
+
+**Connection Details:**
+
+- **Host**: `localhost`
+- **Port**: `5432`
+- **Database**: `taskdb`
+- **Username**: `user`
+- **Password**: `password`
+
+### Method 4: VS Code PostgreSQL Extension
+
+1. Install the **PostgreSQL** extension in VS Code
+2. Click on the PostgreSQL icon in the sidebar
+3. Add new connection with the details above
+4. Browse and query your database directly in VS Code
+
 ## Project Structure
 
 ```
@@ -172,7 +237,7 @@ docker compose logs -f
 docker compose logs -f backend
 
 # Check database
-docker exec todo_db psql -U postgres -d taskdb -c "SELECT * FROM task;"
+docker exec todo_db psql -U user -d taskdb -c "SELECT * FROM task;"
 
 # Rebuild services
 docker compose up --build --force-recreate
